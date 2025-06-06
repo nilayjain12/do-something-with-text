@@ -1,0 +1,21 @@
+/* Add a transition to the body for a smooth open/close animation */
+body {
+    transition: margin-right 0.4s ease;
+}
+
+/* When our sidebar is active, push the body over */
+body.dsft-sidebar-active {
+    margin-right: 350px !important;
+}
+
+/* The iframe element itself */
+#dsft-sidebar-iframe {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    border: none;
+    box-shadow: -2px 0 15px rgba(0,0,0,0.15);
+    z-index: 99999999;
+}
