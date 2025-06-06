@@ -1,73 +1,76 @@
-# Do Something With Text - Microsoft Edge Extension
+# Do Something With Text
 
-This is a simple, robust, and effective Microsoft Edge extension that provides AI-powered text manipulation tools directly in your browser. It uses the GroqCloud API for fast text summarization and generation.
+## Description
+Do Something With Text is a browser extension integrated with a Flask backend that leverages the Groq API to provide advanced text processing capabilities. The extension allows users to summarize text, generate text continuations, and convert text to speech directly from the browser context menu. The backend handles API key validation and communicates with the Groq API using the llama3-8b-8192 model.
 
 ## Features
+- Summarize selected text concisely.
+- Generate text continuation based on selected text.
+- Text-to-Speech functionality for selected text.
+- Easy API key management via extension popup.
+- Sidebar interface to display results and status.
+- Backend API key validation and text processing.
 
--   **Secure API Key Management**: Your GroqCloud API key is stored securely in your browser's local storage.
--   **Context Menu Integration**: Simply highlight text on any webpage to bring up the tool options.
--   **AI-Powered Tools**:
-    -   **Summarize Text**: Get a concise summary of any selected text.
-    -   **Generate Text**: Use the selected text as a prompt to generate more content.
-    -   **Text-to-Speech**: Listen to the selected text read aloud.
--   **Minimalistic UI**: A clean and non-intrusive user interface ensures a smooth experience.
--   **Copy to Clipboard**: Easily copy the results with a single click.
+## Prerequisites
+- Python 3.7 or higher
+- Flask
+- Google Chrome or Chromium-based browser
+- Valid GroqCloud API key
 
-## Setup Instructions
+## Installation
 
-### Step 1: Get a GroqCloud API Key
+### Backend Setup
+1. Navigate to the `backend` directory:
+   ```bash
+   cd backend
+   ```
+2. (Optional) Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. Install required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the Flask backend server:
+   ```bash
+   python main.py
+   ```
+   The backend will start at `http://127.0.0.1:5000`.
 
-1.  Go to the [GroqCloud Console](https://console.groq.com/keys).
-2.  Sign up or log in to your account.
-3.  Navigate to the **API Keys** section and create a new secret key.
-4.  Copy the key. You will need it in a later step.
+### Extension Setup
+1. Open Google Chrome and navigate to `chrome://extensions/`.
+2. Enable "Developer mode" (toggle in the top right).
+3. Click "Load unpacked" and select the project root directory containing the `src` folder.
+4. The extension will be added to Chrome.
 
-### Step 2: Set Up and Run the Python Backend
+## Usage
 
-This extension uses a local Python backend to securely handle API requests to GroqCloud.
+### Setting the API Key
+- Click the extension icon to open the popup.
+- Enter your GroqCloud API key and click "Save Key".
+- The key will be validated against the backend. If valid, it will be saved for use.
 
-1.  **Prerequisites**: Make sure you have Python 3.6+ and `pip` installed.
-2.  **Navigate to the Backend Directory**:
-    Open a terminal or command prompt and navigate to the `backend` folder within the project directory.
-    ```sh
-    cd /path/to/groq-text-manipulator-edge/backend
-    ```
-3.  **Create a Virtual Environment** (Recommended):
-    ```sh
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
-4.  **Install Dependencies**:
-    ```sh
-    pip install -r requirements.txt
-    ```
-5.  **Run the Backend Server**:
-    ```sh
-    python main.py
-    ```
-    You should see a message indicating that the server is running on `http://127.0.0.1:5000`. Keep this terminal window open while you use the extension.
+### Using Context Menu Actions
+- Select any text on a webpage.
+- Right-click to open the context menu.
+- Choose one of the following options:
+  - **Summarize Text**: Get a concise summary of the selected text.
+  - **Generate Text**: Generate a continuation of the selected text.
+  - **Text-to-Speech**: Listen to the selected text read aloud.
 
-### Step 3: Load the Extension in Microsoft Edge
+### Sidebar Interface
+- When using "Summarize Text" or "Generate Text", a sidebar will appear displaying the result.
+- The sidebar can be closed by sending a message from the iframe or by closing the tab.
 
-1.  Open Microsoft Edge and navigate to `edge://extensions`.
-2.  Enable **Developer mode** by toggling the switch in the bottom-left corner.
-3.  Click on the **Load unpacked** button.
-4.  Select the entire `groq-text-manipulator-edge` folder (the root directory of this project).
-5.  The extension "Groq Text Manipulator" should now appear in your list of extensions.
+## Dependencies
 
-### Step 4: Configure the Extension
+  - Flask
+  - flask-cors
+  - groq (Groq API client)
 
-1.  Click on the Groq Text Manipulator icon in the Edge toolbar. A pop-up will appear.
-2.  Paste your GroqCloud API key into the input field and click **Save Key**.
-3.  The extension will validate the key. If it's valid, the key will be saved, and you are ready to go!
+## Future Development
+#### Coming Soon   .   .   . 
 
-## How to Use
-
-1.  Navigate to any webpage with text.
-2.  Highlight the text you want to work with.
-3.  **Right-click** on the selected text.
-4.  From the context menu, choose one of the options:
-    -   **Summarize Text**
-    -   **Generate Text**
-    -   **Text-to-Speech**
-5.  A pop-up will appear in the top-right corner of the page with the result.
+---
