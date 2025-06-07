@@ -6,16 +6,13 @@ import os
 app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing
 
-# --- ADD THIS NEW FUNCTION ---
 @app.route('/')
 def index():
     """Provides a simple status message to confirm the backend is running."""
     return jsonify({
         "status": "ok",
-        "message": "Groq backend is running. It's ready to receive requests from the Edge extension."
+        "message": "DSFT backend is running. It's ready to receive requests from the Edge extension."
     }), 200
-# -----------------------------
-
 
 def validate_key(api_key: str):
     """Validates the Groq API key by making a lightweight call."""
@@ -61,9 +58,11 @@ def process_text():
 
     try:
         if action == 'summarize-text':
-            prompt = f"Summarize the following text concisely:\n\n{text}"
+            prompt = f"Summarize the following text concisely. Format the output using Markdown for readability if needed (e.g., bolding key terms, using bullet points for lists):\n\n{text}"
         elif action == 'generate-text':
-            prompt = f"Continue writing from the following text:\n\n{text}"
+            prompt = f"Continue writing from the following text. Format the output using Markdown for readability if needed:\n\n{text}"
+        elif action == 'find-meaning':
+            prompt = f"Explain the meaning of the following word or phrase in simple, layman's terms. The definition should be easy to understand. Then, provide one clear example of how it is used in a sentence. Use Markdown for formatting (e.g., bold the word, use italics for the example).\n\nText: \"{text}\""
         else:
             return jsonify({"error": "Invalid action"}), 400
 
@@ -83,5 +82,5 @@ def process_text():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    print("Starting Flask backend at http://127.0.0.1:5000")
+    print("Starting DSFT Backend Server at http://127.0.0.1:5000")
     app.run(port=5000, debug=True)

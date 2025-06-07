@@ -10,20 +10,20 @@ window.addEventListener('message', (event) => {
         closeSidebar();
     }
 });
+
 const SIDEBAR_ID = 'dsft-sidebar-iframe';
 
 // Main function to handle actions
 async function handleAction(action, text) {
   const apiKey = await getApiKey();
   if (!apiKey) {
-    alert("Groq API key is not set. Please set it in the extension's popup.");
+    alert("API key is not set. Please set it in the extension's popup.");
     return;
   }
 
-  // Create the sidebar if it doesn't exist
-  createSidebar();
-
-  if (action === 'summarize-text' || action === 'generate-text') {
+  // Create the sidebar if it doesn't exist for AI actions
+  if (action === 'summarize-text' || action === 'generate-text' || action === 'find-meaning') {
+    createSidebar();
     // Show loading state in the sidebar
     postMessageToSidebar({ type: 'groqLoading' });
     try {
@@ -98,10 +98,5 @@ function handleTextToSpeech(text) {
     }
   }
   currentUtterance = new SpeechSynthesisUtterance(text);
-  // Optional: If you want to show an error in the sidebar for TTS issues.
-  // currentUtterance.onerror = (event) => {
-  //   createSidebar();
-  //   postMessageToSidebar({ type: 'groqResult', content: `Text-to-Speech Error: ${event.error}` });
-  // };
   speechSynthesis.speak(currentUtterance);
 }

@@ -15,8 +15,12 @@ window.addEventListener('message', (event) => {
     const contentArea = document.getElementById('content-area');
 
     if (message.type === 'groqResult') {
+        // 1. Convert the AI's Markdown text to HTML using the 'marked' library
+        // 2. Sanitize the HTML to prevent security risks using 'DOMPurify'
+        const sanitizedHtml = DOMPurify.sanitize(marked.parse(message.content));
+
         contentArea.innerHTML = `
-            <div>${escapeHtml(message.content)}</div>
+            <div>${sanitizedHtml}</div>
             <div class="button-container">
                 <button class="copy-btn">Copy to Clipboard</button>
             </div>
@@ -24,6 +28,7 @@ window.addEventListener('message', (event) => {
 
         // Add event listener to the new copy button
         contentArea.querySelector('.copy-btn').addEventListener('click', () => {
+            // We copy the original, unformatted text
             navigator.clipboard.writeText(message.content);
             const btn = contentArea.querySelector('.copy-btn');
             btn.textContent = 'Copied!';
@@ -33,12 +38,3 @@ window.addEventListener('message', (event) => {
         contentArea.innerHTML = '<div class="spinner"></div>';
     }
 });
-
-function escapeHtml(unsafe) {
-    return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
- }

@@ -23,10 +23,8 @@ chrome.runtime.onInstalled.addListener(() => {
       chrome.action.setPopup({ popup: 'src/popup.html' });
     }
   });
-});
 
-// Create context menus upon installation
-chrome.runtime.onInstalled.addListener(() => {
+  // Create context menus upon installation
   chrome.contextMenus.create({
     id: "summarize-text",
     title: "Summarize Text",
@@ -36,6 +34,12 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "generate-text",
     title: "Generate Text",
+    contexts: ["selection"]
+  });
+  
+  chrome.contextMenus.create({
+    id: "find-meaning",
+    title: "Find Meaning",
     contexts: ["selection"]
   });
 
