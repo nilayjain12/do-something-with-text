@@ -1,11 +1,12 @@
 # Do Something With Text
 
 ## Description
-Do Something With Text is a browser extension integrated with a Flask backend that leverages the Groq API to provide advanced text processing capabilities. The extension allows users to summarize text, generate text continuations, and convert text to speech directly from the browser context menu. The backend handles API key validation and communicates with the Groq API using the llama3-8b-8192 model.
+Do Something With Text is a browser extension integrated with a Flask backend that leverages the Groq API to provide advanced text processing capabilities. The extension allows users to summarize text, find meaning of text, generate text continuations, and convert text to speech directly from the browser context menu. The backend handles API key validation and communicates with the Groq API using the llama3-8b-8192 model.
 
 ## Features
 - Summarize selected text concisely.
 - Generate text continuation based on selected text.
+- Find simple meaning of any selected word or phrase.
 - Text-to-Speech functionality for selected text.
 - Easy API key management via extension popup.
 - Sidebar interface to display results and status.
